@@ -10,11 +10,11 @@ class TestTextNode(unittest.TestCase):
 
     def test_noteq(self):
         test_A = TextNode("test a", TextType.BOLD)
-        test_B = TextNode("test b", TextType.LINK, "https://www.chordshore.com/")
+        test_B = TextNode("test b", TextType.LINK, "https://www.google.com/")
         self.assertNotEqual(test_A, test_B)
 
     def test_url_noteq(self):
-        test_B = TextNode("test b", TextType.LINK, "https://www.chordshore.com/")
+        test_B = TextNode("test b", TextType.LINK, "https://www.google.com/")
         test_D = TextNode("test b", TextType.LINK, "https://www.youtube.com/")
         self.assertNotEqual(test_B, test_D)
 
@@ -25,7 +25,7 @@ class TestTextNode(unittest.TestCase):
 
     def test_repr(self):
         test_A = TextNode("test a", TextType.BOLD)
-        test_B = TextNode("test b", TextType.LINK, "https://www.chordshore.com/")
+        test_B = TextNode("test b", TextType.LINK, "https://www.google.com/")
         print(repr(test_A))
         print(repr(test_B))
 
