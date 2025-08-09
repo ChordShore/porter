@@ -1,6 +1,6 @@
 import unittest
 
-from textnode import TextNode, TextType
+from textnode import *
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
@@ -26,8 +26,8 @@ class TestTextNode(unittest.TestCase):
     def test_repr(self):
         test_A = TextNode("test a", TextType.BOLD)
         test_B = TextNode("test b", TextType.LINK, "https://www.google.com/")
-        print(repr(test_A))
-        print(repr(test_B))
+        self.assertEqual(repr(test_A), "TextNode(test a, bold_text, None)")
+        self.assertEqual(repr(test_B), "TextNode(test b, link, https://www.google.com/)")
 
 if __name__ == "__main__":
     unittest.main()
