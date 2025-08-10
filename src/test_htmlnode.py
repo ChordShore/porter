@@ -74,7 +74,5 @@ class TestTextNode(unittest.TestCase):
 		except ValueError as error:
 			print("Expecting no children:", error)
 
-
-
 if __name__ == "__main__":
 	unittest.main()
