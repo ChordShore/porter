@@ -1,7 +1,7 @@
 import unittest
 
 from textnode import *
-from splitdelimiter import *
+from split_nodes_delimiter import *
 
 class TestSplitDelimiter(unittest.TestCase):
 
@@ -30,6 +30,7 @@ class TestSplitDelimiter(unittest.TestCase):
 			TextNode(" word", TextType.TEXT),
 		])
 
+	#Below Unit Tests from the Boot.dev solution files
 	def test_delim_bold(self):
 		node = TextNode("This is text with a **bolded** word", TextType.TEXT)
 		new_nodes = split_nodes_delimiter([node], "**", TextType.BOLD)
@@ -42,7 +43,6 @@ class TestSplitDelimiter(unittest.TestCase):
 			new_nodes,
 		)
 
-    #Below Unit Tests from the Boot.dev solution files
 	def test_delim_bold_double(self):
 		node = TextNode(
 			"This is text with a **bolded** word and **another**", TextType.TEXT
