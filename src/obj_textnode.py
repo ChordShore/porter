@@ -1,6 +1,6 @@
 from enum import Enum
 
-from htmlnode import *
+from obj_htmlnode import *
 
 class TextType(Enum):
     TEXT = "plain_text"
