@@ -4,31 +4,24 @@ from extract_markdown_images import *
 def split_nodes_image(old_nodes):
 	new_nodes = []
 	for node in old_nodes:
+		if node.text_type != TextType.TEXT:
+			new_nodes.append(node)
+			continue
 		found_images = extract_markdown_images(node.text)
 		if len(found_images) < 1:
 			new_nodes.append(node)
 			continue
-
-		new_text_list = []
 		temp_node_text = node.text
-		while len(temp_node_text) > 0:
-			for link in found_images:
-				if link[0] in temp_node_text:
-					split_text = temp_node_text.split(f"![{link[0]}]({link[1]})", 1)
-					new_text_list.append(split_text[0])
-					new_text_list.append(link)
-					if len(split_text) > 1:
-						temp_node_text = split_text[1]
-					else:
-						break
 
-		for i in range(len(new_text_list)):
-			if new_text_list[i] == "":
-				continue
-			#print("New Text List: ", new_text_list[i])
-			if new_text_list[i] in found_images:
-				new_nodes.append(TextNode(new_text_list[i][0], TextType.IMAGE, new_text_list[i][1]))
-			else:
-				new_nodes.append(TextNode(new_text_list[i], TextType.TEXT))
-				
+		for image in found_images:
+			split_text = temp_node_text.split(f"![{image[0]}]({image[1]})", 1)
+			if len(split_text) != 2:
+				raise ValueError("Closing image syntax not found, invalid Markdown syntax!")				
+			if split_text[0] != "":
+				new_nodes.append(TextNode(split_text[0], TextType.TEXT))
+			new_nodes.append(TextNode(image[0], TextType.IMAGE, image[1]))
+			temp_node_text = split_text[1]
+		if temp_node_text != "":
+			new_nodes.append(TextNode(temp_node_text, TextType.TEXT))		
+
 	return new_nodes

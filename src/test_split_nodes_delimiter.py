@@ -3,7 +3,7 @@ import unittest
 from obj_textnode import *
 from split_nodes_delimiter import *
 
-class TestSplitDelimiter(unittest.TestCase):
+class TestSplitNodesDelimiter(unittest.TestCase):
 
 	def test_text(self):
 		node = TextNode("This is text", TextType.TEXT)

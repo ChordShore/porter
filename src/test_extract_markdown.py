@@ -3,7 +3,7 @@ import unittest
 from extract_markdown_images import *
 from extract_markdown_links import *
 
-class TestTextNode(unittest.TestCase):
+class TestExtractMarkdown(unittest.TestCase):
 
     def test_extract_markdown_images(self):
         matches = extract_markdown_images(
@@ -16,3 +16,6 @@ class TestTextNode(unittest.TestCase):
             text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
         )
         self.assertListEqual([("to boot dev", "https://www.boot.dev"), ("to youtube", "https://www.youtube.com/@bootdotdev")], matches)
+
+if __name__ == "__main__":
+	unittest.main()

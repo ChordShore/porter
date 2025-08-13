@@ -3,9 +3,9 @@ import unittest
 from obj_textnode import *
 from split_nodes_link import *
 
-class TestSplitDelimiter(unittest.TestCase):
+class TestSplitNodesLink(unittest.TestCase):
 
-	def test_split_link(self):
+	def test_split_nodes_link(self):
 		node = TextNode(
 			"This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
 			TextType.TEXT,

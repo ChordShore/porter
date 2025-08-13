@@ -2,7 +2,7 @@ import unittest
 
 from obj_htmlnode import *
 
-class TestTextNode(unittest.TestCase):
+class TestHTMLNode(unittest.TestCase):
 
 	def test_to_html(self):
 		test_A = HTMLNode("<a>","Text in a paragraph", None, {"href": "https://www.google.com"})

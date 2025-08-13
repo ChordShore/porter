@@ -3,7 +3,7 @@ import unittest
 from obj_textnode import *
 from split_nodes_image import *
 
-class TestSplitDelimiter(unittest.TestCase):
+class TestSplitNodesImage(unittest.TestCase):
 
 	def test_split_images(self):
 		node = TextNode(
@@ -11,6 +11,7 @@ class TestSplitDelimiter(unittest.TestCase):
 			TextType.TEXT,
 		)
 		new_nodes = split_nodes_image([node])
+		
 		self.assertListEqual(
 			[
 				TextNode("This is text with an ", TextType.TEXT),
