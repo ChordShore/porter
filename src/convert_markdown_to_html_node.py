@@ -12,7 +12,9 @@ def convert_markdown_to_html_node(markdown):
         block_type = convert_block_to_block_type(block)
 
         if block_type == BlockType.PARAGRAPH:
-            children = convert_text_to_children(block)
+            lines = block.split("\n")
+            lines = " ".join(lines)
+            children = convert_text_to_children(lines)
             node = ParentNode("p", children)
             child_nodes.append(node)
 
@@ -21,7 +23,12 @@ def convert_markdown_to_html_node(markdown):
             for char in block:
                 if char == "#":
                     hash_count += 1
-            children = convert_text_to_children(block)
+                else:
+                    break
+            if hash_count > 6:
+                raise ValueError("Invalid Heading Level!")
+            line = block[hash_count + 1 : ]
+            children = convert_text_to_children(line)
             node = ParentNode(f"h{hash_count}", children)
             child_nodes.append(node)
 
@@ -34,21 +41,36 @@ def convert_markdown_to_html_node(markdown):
             child_nodes.append(node)
 
         if block_type == BlockType.QUOTE:
-            children = convert_text_to_children(block)
+            lines = block.split("\n")
+            quote_lines = []
+            for line in lines:
+                if line.startswith(">") is False:
+                    raise ValueError("Invalid Quote Block")
+                quote_lines.append(line.lstrip(">").strip())
+            text = " ".join(quote_lines)
+            children = convert_text_to_children(text)
             node = ParentNode("blockquote", children)
             child_nodes.append(node)
         
         if block_type == BlockType.UNORDERED_LIST:
-            children = convert_text_to_children(block)
-            node = ParentNode("", children)
+            lines = block.split("\n")
+            children = []
+            for line in lines:
+                text = line[2:]
+                list_children = convert_text_to_children(text)
+                children.append(ParentNode("li", list_children))
+            node = ParentNode("ul", children)
             child_nodes.append(node)
         
         if block_type == BlockType.ORDERED_LIST:
-            children = convert_text_to_children(block)
-            node = ParentNode("", children)
+            lines = block.split("\n")
+            children = []
+            for line in lines:
+                text = line[3:]
+                list_children = convert_text_to_children(text)
+                children.append(ParentNode("li", list_children))
+            node = ParentNode("ol", children)
             child_nodes.append(node)
 
     parent_node = ParentNode("div", child_nodes)
     return parent_node
-
-    
