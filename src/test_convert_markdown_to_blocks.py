@@ -1,6 +1,6 @@
 import unittest
 
-from convert_to_blocks import *
+from convert_markdown_to_blocks import *
 
 class TestConvertToBlocks(unittest.TestCase):
 
@@ -14,7 +14,7 @@ This is the same paragraph on a new line
 - This is a list
 - with items
 """
-        blocks = convert_to_blocks(md)
+        blocks = convert_markdown_to_blocks(md)
         self.assertEqual(
             blocks,
             [
@@ -24,15 +24,28 @@ This is the same paragraph on a new line
             ],
         )
 
-    def test_empty_with_newlines(self):
+    def test_markdown_to_blocks_newlines(self):
         md = """
+This is **bolded** paragraph
 
-test
 
 
+
+This is another paragraph with _italic_ text and `code` here
+This is the same paragraph on a new line
+
+- This is a list
+- with items
 """
-        blocks = convert_to_blocks(md)
-        self.assertEqual(blocks, ["test"])
+        blocks = convert_markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+                "This is **bolded** paragraph",
+                "This is another paragraph with _italic_ text and `code` here\nThis is the same paragraph on a new line",
+                "- This is a list\n- with items",
+            ],
+        )
 
 if __name__ == "__main__":
 	unittest.main()

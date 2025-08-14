@@ -3,9 +3,9 @@ from split_nodes_delimiter import *
 from split_nodes_link import *
 from split_nodes_image import *
 
-def text_to_textnodes(text):
-    node = TextNode(text, TextType.TEXT)
-    debold_nodes = split_nodes_delimiter([node], "**", TextType.BOLD)
+def convert_text_to_text_node(text):
+    node = [TextNode(text, TextType.TEXT)]
+    debold_nodes = split_nodes_delimiter(node, "**", TextType.BOLD)
     decode_nodes = split_nodes_delimiter(debold_nodes, "`", TextType.CODE)
     deital_nodes = split_nodes_delimiter(decode_nodes, "_", TextType.ITALIC)
     deimag_nodes = split_nodes_image(deital_nodes)
