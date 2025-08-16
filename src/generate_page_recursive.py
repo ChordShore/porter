@@ -3,7 +3,7 @@ import os, shutil
 from extract_markdown_title import *
 from convert_markdown_to_html_node import *
 
-def generate_page_recursive(dir_path_content, template_path, dir_path_dest):
+def generate_page_recursive(dir_path_content, template_path, dir_path_dest, basepath):
     print(f"Generating page from {dir_path_content} to {dir_path_dest} using {template_path}.")
     
     file_list = os.listdir(dir_path_content)
@@ -26,6 +26,8 @@ def generate_page_recursive(dir_path_content, template_path, dir_path_dest):
             content = html.to_html()
             template = template.replace("{{ Title }}", title)
             template = template.replace("{{ Content }}", content)
+            template = template.replace("href=\"/", f"href=\"{basepath}")
+            template = template.replace("src=\"/", f"src=\"{basepath}")
 
             if not os.path.exists(os.path.dirname(public_copy_path)):
                 os.makedirs(public_copy_path)
@@ -33,4 +35,4 @@ def generate_page_recursive(dir_path_content, template_path, dir_path_dest):
                 file_write.write(template)
         elif os.path.isdir(content_copy_path):
             os.mkdir(public_copy_path)
-            generate_page_recursive(content_copy_path, template_path, public_copy_path)
+            generate_page_recursive(content_copy_path, template_path, public_copy_path, basepath)
