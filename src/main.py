@@ -1,11 +1,11 @@
 from deploy_static_to_public import *
-from generate_page import *
+from generate_page_recursive import *
 
 def main():
     deploy_static_to_public()
-    from_path = "../porter/content/index.md"
+    dir_path_cont = "../porter/content/"
     template_path = "../porter/template.html"
-    dest_path = "../porter/public/"
-    generate_page(from_path, template_path, dest_path)
+    dir_path_dest = "../porter/public/"
+    generate_page_recursive(dir_path_cont, template_path, dir_path_dest)
 
 main()
