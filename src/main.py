@@ -5,7 +5,9 @@ from generate_page_recursive import *
 
 def main():
 
-    basepath = sys.argv[0]
+    print(sys.argv)
+    basepath = sys.argv[1]
+    print(basepath)
     if basepath is None:
         basepath = "/"
 
